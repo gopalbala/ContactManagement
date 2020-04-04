@@ -6,3 +6,6 @@ spring:
       host: localhost
       port: 27017
       database: contactmanagement
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

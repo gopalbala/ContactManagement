@@ -11,7 +11,7 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collation = "contacts")
+@Document(collection = "contacts")
 @TypeAlias("contact")
 @Data
 @NoArgsConstructor
