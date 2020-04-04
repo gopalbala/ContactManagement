@@ -1,0 +1,62 @@
+package com.gb.contactmanagement.contactmanagement.web.contoller;
+
+import com.gb.contactmanagement.contactmanagement.model.Contact;
+import com.gb.contactmanagement.contactmanagement.model.Gender;
+import com.gb.contactmanagement.contactmanagement.model.Salutation;
+import com.gb.contactmanagement.contactmanagement.service.ContactServiceImpl;
+import com.gb.contactmanagement.contactmanagement.web.controller.ContactController;
+import com.gb.contactmanagement.contactmanagement.web.dto.ContactDto;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.commons.util.StringUtils;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class ContactcontrollerTest {
+    @LocalServerPort
+    int randomServerPort;
+
+    ContactDto contactDto;
+    Contact contact;
+
+    @MockBean
+    ContactServiceImpl contactService;
+
+    @BeforeEach
+    public void setUp() {
+        contactDto = ContactDto.builder()
+                .emailId("sample@domain.com")
+                .firstName("firstName")
+                .lastName("lastName")
+                .gender(Gender.FEMALE)
+                .age((short) 35)
+                .salutation(Salutation.MRS).build();
+
+        contact = new Contact(contactDto);
+    }
+
+    @Test
+    public void addContactTest() throws URISyntaxException {
+        given(contactService.save(any())).willReturn(contact);
+        final String baseUrl = "http://localhost:"+randomServerPort+"/contacts";
+        URI uri = new URI(baseUrl);
+        HttpEntity<ContactDto> request = new HttpEntity<>(contactDto);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Contact> contactResponseEntity = restTemplate.postForEntity(uri,request, Contact.class);
+        Assertions.assertEquals(200, contactResponseEntity.getStatusCode().value());
+        Assertions.assertNotNull(contactResponseEntity.getBody().getFullName());
+    }
+}
