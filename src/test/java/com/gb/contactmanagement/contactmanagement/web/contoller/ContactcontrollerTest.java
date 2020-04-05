@@ -50,14 +50,14 @@ public class ContactcontrollerTest {
 
     @Test
     public void addContactTest() throws URISyntaxException {
-        given(contactService.save(any())).willReturn(contact);
+        given(contactService.save(any())).willReturn(contactDto);
         final String baseUrl = "http://localhost:"+randomServerPort+"/contactservice/v1/contacts";
         URI uri = new URI(baseUrl);
         HttpEntity<ContactDto> request = new HttpEntity<>(contactDto);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Contact> contactResponseEntity = restTemplate.postForEntity(uri,request, Contact.class);
+        ResponseEntity<ContactDto> contactResponseEntity = restTemplate.postForEntity(uri,request, ContactDto.class);
         Assertions.assertEquals(200, contactResponseEntity.getStatusCode().value());
-        Assertions.assertNotNull(contactResponseEntity.getBody().getFullName());
+        Assertions.assertNotNull(contactResponseEntity.getBody().getFirstName());
     }
 
     @Test

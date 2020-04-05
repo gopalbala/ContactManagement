@@ -4,6 +4,8 @@ import com.gb.contactmanagement.contactmanagement.model.Contact;
 import com.gb.contactmanagement.contactmanagement.service.ContactService;
 import com.gb.contactmanagement.contactmanagement.web.dto.ContactDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,12 +15,14 @@ public class ContactController {
     ContactService contactService;
 
     @RequestMapping(value = "/contacts", method = RequestMethod.POST, produces = {"application/JSON"}, consumes = {"application/JSON"})
-    public Contact addContact(@RequestBody ContactDto contactDto) {
-        return contactService.save(contactDto);
+    public ResponseEntity<?> addContact(@RequestBody ContactDto contactDto) {
+        return new ResponseEntity(contactService.save(contactDto), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/contacts/{emailId}", method = RequestMethod.GET, produces = {"application/JSON"})
-    public ContactDto getContactById(@PathVariable String emailId) {
-        return contactService.findById(emailId);
+    public ResponseEntity<?> getContactById(@PathVariable String emailId) {
+        if (contactService.findById(emailId) == null)
+            return new ResponseEntity("Not Found", HttpStatus.NOT_FOUND);
+        return new ResponseEntity(contactService.findById(emailId), HttpStatus.OK);
     }
 }

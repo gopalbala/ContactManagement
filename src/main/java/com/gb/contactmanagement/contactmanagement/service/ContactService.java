@@ -6,7 +6,7 @@ import com.gb.contactmanagement.contactmanagement.web.dto.ContactDto;
 import java.util.List;
 
 public interface ContactService {
-    Contact save(ContactDto contactDto);
+    ContactDto save(ContactDto contactDto);
     ContactDto findById(String emailId);
     List<Contact> findByName(String name);
     List<Contact> findByGender(String gender);

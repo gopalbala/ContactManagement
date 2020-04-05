@@ -42,7 +42,7 @@ public class ContactServiceImplTest {
     @Test
     public void saveTest() {
         given(contactRepository.save(any())).willReturn(contact);
-        Contact result = contactService.save(contactDto);
+        ContactDto result = contactService.save(contactDto);
         Assertions.assertNotNull(result);
         Assertions.assertEquals("sample@domain.com",result.getEmailId());
     }

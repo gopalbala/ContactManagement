@@ -16,8 +16,8 @@ public class ContactServiceImpl implements ContactService {
     ContactRepository contactRepository;
 
     @Override
-    public Contact save(ContactDto contactDto) {
-        return contactRepository.save(new Contact(contactDto));
+    public ContactDto save(ContactDto contactDto) {
+        return new ContactDto(contactRepository.save(new Contact(contactDto)));
     }
 
     @Override
