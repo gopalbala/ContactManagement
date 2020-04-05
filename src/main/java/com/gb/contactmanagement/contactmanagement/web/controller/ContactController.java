@@ -4,10 +4,7 @@ import com.gb.contactmanagement.contactmanagement.model.Contact;
 import com.gb.contactmanagement.contactmanagement.service.ContactService;
 import com.gb.contactmanagement.contactmanagement.web.dto.ContactDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/contactservice/v1")
@@ -18,5 +15,10 @@ public class ContactController {
     @RequestMapping(value = "/contacts", method = RequestMethod.POST, produces = {"application/JSON"}, consumes = {"application/JSON"})
     public Contact addContact(@RequestBody ContactDto contactDto) {
         return contactService.save(contactDto);
+    }
+
+    @RequestMapping(value = "/contacts/{emailId}", method = RequestMethod.GET, produces = {"application/JSON"})
+    public ContactDto getContactById(@PathVariable String emailId) {
+        return contactService.findById(emailId);
     }
 }

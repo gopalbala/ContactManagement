@@ -1,5 +1,6 @@
 package com.gb.contactmanagement.contactmanagement.web.dto;
 
+import com.gb.contactmanagement.contactmanagement.model.Contact;
 import com.gb.contactmanagement.contactmanagement.model.Gender;
 import com.gb.contactmanagement.contactmanagement.model.Salutation;
 import lombok.*;
@@ -16,4 +17,15 @@ public class ContactDto {
     Gender gender;
     Salutation salutation;
     short age;
+
+
+    public ContactDto(Contact contact) {
+        this.emailId = contact.getEmailId();
+        this.firstName = contact.getFirstName();
+        this.lastName = contact.getLastName();
+        this.middleName = contact.getMiddleName();
+        this.gender = contact.getGender();
+        this.salutation = contact.getSalutation();
+        this.age = contact.getAge();
+    }
 }

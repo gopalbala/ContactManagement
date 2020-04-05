@@ -51,12 +51,23 @@ public class ContactcontrollerTest {
     @Test
     public void addContactTest() throws URISyntaxException {
         given(contactService.save(any())).willReturn(contact);
-        final String baseUrl = "http://localhost:"+randomServerPort+"/contacts";
+        final String baseUrl = "http://localhost:"+randomServerPort+"/contactservice/v1/contacts";
         URI uri = new URI(baseUrl);
         HttpEntity<ContactDto> request = new HttpEntity<>(contactDto);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Contact> contactResponseEntity = restTemplate.postForEntity(uri,request, Contact.class);
         Assertions.assertEquals(200, contactResponseEntity.getStatusCode().value());
         Assertions.assertNotNull(contactResponseEntity.getBody().getFullName());
+    }
+
+    @Test
+    public void getContactTest() throws URISyntaxException {
+        given(contactService.findById("sample@domain.com")).willReturn(contactDto);
+        final String baseUrl = "http://localhost:"+randomServerPort+"/contactservice/v1/contacts/sample@domain.com";
+        URI uri = new URI(baseUrl);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<ContactDto> contactResponseEntity = restTemplate.getForEntity(uri,ContactDto.class);
+        Assertions.assertEquals(200, contactResponseEntity.getStatusCode().value());
+        Assertions.assertNotNull(contactResponseEntity.getBody().getEmailId());
     }
 }

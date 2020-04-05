@@ -21,8 +21,11 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Optional<Contact> findById(String emailId) {
-        return contactRepository.findById(emailId);
+    public ContactDto findById(String emailId) {
+        Optional<Contact> contact = contactRepository.findById(emailId);
+        if (contact.isEmpty())
+            return null;
+        return new ContactDto(contact.get());
     }
 
     @Override
