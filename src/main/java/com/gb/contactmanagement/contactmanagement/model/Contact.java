@@ -46,6 +46,7 @@ public class Contact {
     }
 
     private String getFullName(String firstName, String middleName, String lastName) {
-        return firstName + middleName == null ? StringUtils.EMPTY : " " + middleName + lastName == null ? StringUtils.EMPTY : " " + lastName;
+        String fullName = firstName + (middleName == null ? StringUtils.EMPTY : " " + middleName) + (lastName == null ? StringUtils.EMPTY : " " + lastName);
+        return fullName;
     }
 }
