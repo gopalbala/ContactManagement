@@ -1,10 +1,10 @@
-package com.gb.contactmanagement.contactmanagement.service;
+package com.gb.contactmanagement.service;
 
-import com.gb.contactmanagement.contactmanagement.model.Contact;
-import com.gb.contactmanagement.contactmanagement.model.Gender;
-import com.gb.contactmanagement.contactmanagement.model.Salutation;
-import com.gb.contactmanagement.contactmanagement.repository.ContactRepository;
-import com.gb.contactmanagement.contactmanagement.web.dto.ContactDto;
+import com.gb.contactmanagement.model.Contact;
+import com.gb.contactmanagement.model.Gender;
+import com.gb.contactmanagement.model.Salutation;
+import com.gb.contactmanagement.repository.ContactRepository;
+import com.gb.contactmanagement.web.dto.ContactDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

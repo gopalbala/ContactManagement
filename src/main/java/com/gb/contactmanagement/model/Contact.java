@@ -1,9 +1,8 @@
-package com.gb.contactmanagement.contactmanagement.model;
+package com.gb.contactmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.gb.contactmanagement.contactmanagement.web.dto.ContactDto;
+import com.gb.contactmanagement.web.dto.ContactDto;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;

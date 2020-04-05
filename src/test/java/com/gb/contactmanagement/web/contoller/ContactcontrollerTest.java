@@ -1,16 +1,13 @@
-package com.gb.contactmanagement.contactmanagement.web.contoller;
+package com.gb.contactmanagement.web.contoller;
 
-import com.gb.contactmanagement.contactmanagement.model.Contact;
-import com.gb.contactmanagement.contactmanagement.model.Gender;
-import com.gb.contactmanagement.contactmanagement.model.Salutation;
-import com.gb.contactmanagement.contactmanagement.service.ContactServiceImpl;
-import com.gb.contactmanagement.contactmanagement.web.controller.ContactController;
-import com.gb.contactmanagement.contactmanagement.web.dto.ContactDto;
+import com.gb.contactmanagement.model.Contact;
+import com.gb.contactmanagement.model.Gender;
+import com.gb.contactmanagement.model.Salutation;
+import com.gb.contactmanagement.service.ContactServiceImpl;
+import com.gb.contactmanagement.web.dto.ContactDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.commons.util.StringUtils;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;

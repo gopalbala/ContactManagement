@@ -1,4 +1,4 @@
-package com.gb.contactmanagement.contactmanagement.model;
+package com.gb.contactmanagement.model;
 
 import lombok.Getter;
 

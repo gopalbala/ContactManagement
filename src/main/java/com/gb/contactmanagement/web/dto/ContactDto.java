@@ -1,8 +1,8 @@
-package com.gb.contactmanagement.contactmanagement.web.dto;
+package com.gb.contactmanagement.web.dto;
 
-import com.gb.contactmanagement.contactmanagement.model.Contact;
-import com.gb.contactmanagement.contactmanagement.model.Gender;
-import com.gb.contactmanagement.contactmanagement.model.Salutation;
+import com.gb.contactmanagement.model.Contact;
+import com.gb.contactmanagement.model.Gender;
+import com.gb.contactmanagement.model.Salutation;
 import lombok.*;
 
 @Data

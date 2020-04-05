@@ -1,8 +1,7 @@
-package com.gb.contactmanagement.contactmanagement.web.controller;
+package com.gb.contactmanagement.web.controller;
 
-import com.gb.contactmanagement.contactmanagement.model.Contact;
-import com.gb.contactmanagement.contactmanagement.service.ContactService;
-import com.gb.contactmanagement.contactmanagement.web.dto.ContactDto;
+import com.gb.contactmanagement.service.ContactService;
+import com.gb.contactmanagement.web.dto.ContactDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
