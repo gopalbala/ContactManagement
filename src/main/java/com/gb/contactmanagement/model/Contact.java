@@ -10,6 +10,8 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 @Document(collection = "contacts")
 @TypeAlias("contact")
 @Data
@@ -17,21 +19,29 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Contact {
     @Id
-    String emailId;
+    private String emailId;
     @Field("firstName")
-    String firstName;
+    private String firstName;
     @Field("middleName")
-    String middleName;
+    private String middleName;
     @Field("lastName")
-    String lastName;
+    private String lastName;
     @Field
-    String fullName;
+    private String fullName;
     @Field("gender")
-    Gender gender;
+    private Gender gender;
     @Field("salutation")
-    Salutation salutation;
+    private Salutation salutation;
     @Field("age")
-    short age;
+    private short age;
+    @Field("address")
+    private List<Address> addressList;
+    @Field("phone")
+    private Phone phone;
+    @Field("friends")
+    private List<String> friends;
+    @Field("verified")
+    private boolean verified;
 
     public Contact(ContactDto contactDto) {
         this.emailId = contactDto.getEmailId();
