@@ -10,6 +10,7 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Document(collection = "contacts")
@@ -38,10 +39,13 @@ public class Contact {
     private List<Address> addressList;
     @Field("phone")
     private Phone phone;
+    @Field
+    private ZonedDateTime zonedDateTime;
     @Field("friends")
     private List<String> friends;
     @Field("verified")
     private boolean verified;
+
 
     public Contact(ContactDto contactDto) {
         this.emailId = contactDto.getEmailId();
@@ -55,6 +59,7 @@ public class Contact {
         this.addressList = contactDto.getAddressList();
         this.phone = contactDto.getPhone();
         this.verified = false;
+
     }
 
     private String getFullName(String firstName, String middleName, String lastName) {
