@@ -52,6 +52,9 @@ public class Contact {
         this.gender = contactDto.getGender();
         this.salutation = contactDto.getSalutation();
         this.age = contactDto.getAge();
+        this.addressList = contactDto.getAddressList();
+        this.phone = contactDto.getPhone();
+        this.verified = false;
     }
 
     private String getFullName(String firstName, String middleName, String lastName) {

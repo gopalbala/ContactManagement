@@ -1,9 +1,13 @@
 package com.gb.contactmanagement.web.dto;
 
-import com.gb.contactmanagement.model.Contact;
-import com.gb.contactmanagement.model.Gender;
-import com.gb.contactmanagement.model.Salutation;
-import lombok.*;
+import com.gb.contactmanagement.model.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -17,7 +21,10 @@ public class ContactDto {
     Gender gender;
     Salutation salutation;
     short age;
-
+    @Field("address")
+    private List<Address> addressList;
+    @Field("phone")
+    private Phone phone;
 
     public ContactDto(Contact contact) {
         this.emailId = contact.getEmailId();

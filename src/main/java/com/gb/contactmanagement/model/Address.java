@@ -21,4 +21,6 @@ public class Address {
     private String country;
     @Field
     private String zipCode;
+    @Field
+    private AddressType addressType;
 }

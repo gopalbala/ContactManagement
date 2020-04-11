@@ -11,6 +11,6 @@ public class Phone {
     private String mobile;
     @Field("secondaryMobile")
     private String secondaryMobile;
-    @Field("emergencyContactNumber")
+    @Field("emergencyNumber")
     private String emergencyNumber;
 }
