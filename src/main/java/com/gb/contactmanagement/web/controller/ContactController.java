@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -89,11 +90,22 @@ public class ContactController {
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/contacts/dob/{dob}", method = RequestMethod.GET, produces = {"application/JSON"})
-    public ResponseEntity<?> getbyDob(@PathVariable ZonedDateTime dateTime) {
-        List<ContactDto> contactDtos = contactService.findByDateOfBirthAfter(dateTime);
+    /**
+     * Find by contact's date of birth before and after
+     * @param dateTime
+     * @return ResponseEntity
+     */
+    @RequestMapping(value = "/contacts/dob/{dateTime}", method = RequestMethod.GET, produces = {"application/JSON"})
+    public ResponseEntity<?> getbyDob(@PathVariable Instant dateTime) {
+//        List<ContactDto> contactDtos = contactService.findByDateOfBirthAfter(dateTime);
+//        if (contactDtos == null)
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+
+        List<ContactDto> contactDtos = contactService.findByDateOfBirthBefore(dateTime);
         if (contactDtos == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+
     }
 }

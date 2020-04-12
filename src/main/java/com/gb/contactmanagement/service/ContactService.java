@@ -2,6 +2,7 @@ package com.gb.contactmanagement.service;
 
 import com.gb.contactmanagement.web.dto.ContactDto;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface ContactService {
     List<ContactDto> findByAgeLessThan(int age);
     List<ContactDto> findByAgeBetween(int from,int to);
     List<ContactDto> findByVerified(boolean verified);
-    List<ContactDto> findByDateOfBirthAfter(ZonedDateTime date);
-
+    List<ContactDto> findByDateOfBirthAfter(Instant date);
+    List<ContactDto> findByDateOfBirthBefore(Instant date);
     List<ContactDto> findByFullNameContaining(String name);
 }

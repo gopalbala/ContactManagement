@@ -6,6 +6,7 @@ import com.gb.contactmanagement.web.dto.ContactDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -105,8 +106,16 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<ContactDto> findByDateOfBirthAfter(ZonedDateTime date) {
+    public List<ContactDto> findByDateOfBirthAfter(Instant date) {
         List<Contact> contacts = contactRepository.findByDateOfBirthAfter(date);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByDateOfBirthBefore(Instant date) {
+        List<Contact> contacts = contactRepository.findByDateOfBirthBefore(date);
         if (null == contacts || contacts.size() == 0)
             return null;
         return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
