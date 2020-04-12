@@ -1,6 +1,7 @@
 package com.gb.contactmanagement.repository;
 
 import com.gb.contactmanagement.model.Contact;
+import com.gb.contactmanagement.web.dto.ContactDto;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface ContactRepository extends MongoRepository<Contact, String> {
     List<Contact> findByAgeGreaterThan(int age);
     List<Contact> findByAgeLessThan(int age);
     List<Contact> findByAgeBetween(int from,int to);
+    List<ContactDto> findByVerifiedIsTrue();
+    List<ContactDto> findByVerifiedIsFalse();
 }

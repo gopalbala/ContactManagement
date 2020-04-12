@@ -89,4 +89,11 @@ public class ContactServiceImpl implements ContactService {
             return null;
         return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ContactDto> findByVerified(boolean verified) {
+        if (verified)
+            return contactRepository.findByVerifiedIsTrue();
+        return contactRepository.findByVerifiedIsFalse();
+    }
 }

@@ -16,4 +16,5 @@ public interface ContactService {
     List<ContactDto> findByAgeGreaterThan(int age);
     List<ContactDto> findByAgeLessThan(int age);
     List<ContactDto> findByAgeBetween(int from,int to);
+    List<ContactDto> findByVerified(boolean verified);
 }

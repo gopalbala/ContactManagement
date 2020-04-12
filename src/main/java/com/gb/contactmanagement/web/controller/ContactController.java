@@ -21,7 +21,6 @@ public class ContactController {
     }
 
 
-
     @RequestMapping(value = "/contacts/name/firstName/{firstName}", method = RequestMethod.GET, produces = {"application/JSON"})
     public ResponseEntity<?> getByFirstName(@PathVariable String firstName) {
         List<ContactDto> contactDtos = null;
@@ -30,7 +29,7 @@ public class ContactController {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
 
-            contactDtos = contactService.findByNameStartingWith(firstName);
+        contactDtos = contactService.findByNameStartingWith(firstName);
 //        if (contactDtos == null)
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
@@ -81,4 +80,11 @@ public class ContactController {
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/contacts/verified/{isVerified}", method = RequestMethod.GET, produces = {"application/JSON"})
+    public ResponseEntity<?> getVerifiedContacts(@PathVariable boolean isVerified) {
+        List<ContactDto> contactDtos = contactService.findByVerified(isVerified);
+        if (contactDtos == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+    }
 }
