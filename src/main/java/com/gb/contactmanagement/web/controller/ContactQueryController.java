@@ -38,4 +38,13 @@ public class ContactQueryController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/contacts/state/{state}", method = RequestMethod.GET, produces = {"application/JSON"})
+    public ResponseEntity<?> getByState(@PathVariable String state) {
+        List<ContactDto> contactDtos = null;
+        contactDtos = contactQueryService.findByState(state);
+        if (contactDtos == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+    }
 }
