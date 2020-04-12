@@ -111,4 +111,12 @@ public class ContactServiceImpl implements ContactService {
             return null;
         return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ContactDto> findByNameContaining(String name) {
+        List<Contact> contacts = contactRepository.findByNameContaining(name);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
 }

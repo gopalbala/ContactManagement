@@ -1,7 +1,6 @@
 package com.gb.contactmanagement.repository;
 
 import com.gb.contactmanagement.model.Contact;
-import com.gb.contactmanagement.web.dto.ContactDto;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.time.ZonedDateTime;
@@ -18,4 +17,6 @@ public interface ContactRepository extends MongoRepository<Contact, String> {
     List<Contact> findByVerifiedIsTrue();
     List<Contact> findByVerifiedIsFalse();
     List<Contact> findByDateOfBirthAfter(ZonedDateTime dateTime);
+
+    List<Contact> findByNameContaining(String name);
 }
