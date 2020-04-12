@@ -4,7 +4,6 @@ import com.gb.contactmanagement.model.Contact;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface ContactRepository extends MongoRepository<Contact, String> {
@@ -20,4 +19,5 @@ public interface ContactRepository extends MongoRepository<Contact, String> {
     List<Contact> findByDateOfBirthAfter(Instant dateTime);
     List<Contact> findByDateOfBirthBefore(Instant dateTime);
     List<Contact> findByFullNameContaining(String name);
+    List<Contact> findByDateOfBirthBeforeOrderByDateOfBirth(Instant dateTime);
 }

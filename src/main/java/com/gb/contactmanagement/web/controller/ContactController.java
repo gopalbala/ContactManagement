@@ -102,7 +102,12 @@ public class ContactController {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
 
-        List<ContactDto> contactDtos = contactService.findByDateOfBirthBefore(dateTime);
+//        List<ContactDto> contactDtos = contactService.findByDateOfBirthBefore(dateTime);
+//        if (contactDtos == null)
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+
+        List<ContactDto> contactDtos = contactService.findByDateOfBirthBeforeSortByDateOfBirthDesc(dateTime);
         if (contactDtos == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
