@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -89,7 +90,10 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/contacts/dob/{dob}", method = RequestMethod.GET, produces = {"application/JSON"})
-    public ResponseEntity<?> getbyAge(@PathVariable int age) {
-        return null;
+    public ResponseEntity<?> getbyDob(@PathVariable ZonedDateTime dateTime) {
+        List<ContactDto> contactDtos = contactService.findByDateOfBirthAfter(dateTime);
+        if (contactDtos == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
     }
 }
