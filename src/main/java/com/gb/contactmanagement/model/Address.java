@@ -10,7 +10,7 @@ public class Address {
     @Field
     private String addressLine1;
     @Field
-    private String addressline2;
+    private String addressLine2;
     @Field
     private String addressLine3;
     @Field

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -29,12 +30,63 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> findByName(String name) {
+    public List<ContactDto> findByFirstName(String firstName) {
+        List<Contact> contacts = contactRepository.findByFirstNameLike(firstName);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByName(String name) {
+        List<Contact> contacts = contactRepository.findByFullNameLike(name);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByNameStartingWith(String name) {
+        List<Contact> contacts = contactRepository.findByFullNameStartingWith(name);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByNameEndingWith(String name) {
+        List<Contact> contacts = contactRepository.findByFullNameEndingWith(name);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByGender(String gender) {
         return null;
     }
 
     @Override
-    public List<Contact> findByGender(String gender) {
-        return null;
+    public List<ContactDto> findByAgeGreaterThan(int age) {
+        List<Contact> contacts = contactRepository.findByAgeGreaterThan(age);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByAgeLessThan(int age) {
+        List<Contact> contacts = contactRepository.findByAgeLessThan(age);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByAgeBetween(int from, int to) {
+        List<Contact> contacts = contactRepository.findByAgeBetween(from, to);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
     }
 }

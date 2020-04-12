@@ -1,6 +1,9 @@
 package com.gb.contactmanagement.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import com.gb.contactmanagement.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ContactDto {
     private String emailId;
     private String firstName;
@@ -23,9 +26,11 @@ public class ContactDto {
     private Gender gender;
     private Salutation salutation;
     private short age;
+    @JsonProperty("address")
     private List<Address> addressList;
     private Phone phone;
-    private ZonedDateTime zonedDateTime;
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
+    private ZonedDateTime dateOfBirth;
     private List<String> friends;
 
     public ContactDto(Contact contact) {

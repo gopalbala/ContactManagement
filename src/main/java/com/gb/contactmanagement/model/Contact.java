@@ -1,6 +1,8 @@
 package com.gb.contactmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import com.gb.contactmanagement.web.dto.ContactDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,7 +42,8 @@ public class Contact {
     @Field("phone")
     private Phone phone;
     @Field
-    private ZonedDateTime zonedDateTime;
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
+    private ZonedDateTime dateOfBirth;
     @Field("friends")
     private List<String> friends;
     @Field("verified")
