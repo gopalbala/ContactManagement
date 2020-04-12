@@ -2,14 +2,18 @@ package com.gb.contactmanagement.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.key.ZonedDateTimeKeyDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.key.ZonedDateTimeKeySerializer;
 import com.gb.contactmanagement.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -44,5 +48,6 @@ public class ContactDto {
         this.addressList = contact.getAddressList();
         this.phone = contact.getPhone();
         this.friends = contact.getFriends();
+        this.dateOfBirth = ZonedDateTime.ofInstant(contact.getDateOfBirth(), ZoneOffset.UTC);
     }
 }

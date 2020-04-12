@@ -12,6 +12,7 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -42,8 +43,7 @@ public class Contact {
     @Field("phone")
     private Phone phone;
     @Field
-    @JsonSerialize(using = ZonedDateTimeSerializer.class)
-    private ZonedDateTime dateOfBirth;
+    private Instant dateOfBirth;
     @Field("friends")
     private List<String> friends;
     @Field("verified")
@@ -61,6 +61,7 @@ public class Contact {
         this.age = contactDto.getAge();
         this.addressList = contactDto.getAddressList();
         this.phone = contactDto.getPhone();
+        this.dateOfBirth = contactDto.getDateOfBirth().toInstant();
         this.verified = false;
 
     }

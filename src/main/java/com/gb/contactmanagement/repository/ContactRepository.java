@@ -18,5 +18,5 @@ public interface ContactRepository extends MongoRepository<Contact, String> {
     List<Contact> findByVerifiedIsFalse();
     List<Contact> findByDateOfBirthAfter(ZonedDateTime dateTime);
 
-    List<Contact> findByNameContaining(String name);
+    List<Contact> findByFullNameContaining(String name);
 }

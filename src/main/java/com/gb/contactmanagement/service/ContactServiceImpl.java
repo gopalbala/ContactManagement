@@ -113,8 +113,8 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<ContactDto> findByNameContaining(String name) {
-        List<Contact> contacts = contactRepository.findByNameContaining(name);
+    public List<ContactDto> findByFullNameContaining(String name) {
+        List<Contact> contacts = contactRepository.findByFullNameContaining(name);
         if (null == contacts || contacts.size() == 0)
             return null;
         return contacts.stream().map(ContactDto::new).collect(Collectors.toList());

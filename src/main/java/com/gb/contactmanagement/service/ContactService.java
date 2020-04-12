@@ -19,5 +19,5 @@ public interface ContactService {
     List<ContactDto> findByVerified(boolean verified);
     List<ContactDto> findByDateOfBirthAfter(ZonedDateTime date);
 
-    List<ContactDto> findByNameContaining(String name);
+    List<ContactDto> findByFullNameContaining(String name);
 }
