@@ -3,7 +3,6 @@ package com.gb.contactmanagement.service;
 import com.gb.contactmanagement.web.dto.ContactDto;
 
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface ContactService {
@@ -44,5 +43,6 @@ public interface ContactService {
     List<ContactDto> findByDateOfBirthAfter(Instant date);
     List<ContactDto> findByDateOfBirthBefore(Instant date);
     List<ContactDto> findByDateOfBirthBeforeSortByDateOfBirthDesc(Instant date);
+
 
 }
