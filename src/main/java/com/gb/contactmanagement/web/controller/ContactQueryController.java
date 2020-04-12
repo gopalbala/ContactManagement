@@ -47,4 +47,13 @@ public class ContactQueryController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/contacts/name/{name}/city/{city}", method = RequestMethod.GET, produces = {"application/JSON"})
+    public ResponseEntity<?> getByFirstNameAndCity(@PathVariable String name, @PathVariable String city) {
+        List<ContactDto> contactDtos = null;
+        contactDtos = contactQueryService.findByFirstNameAndCity(name, city);
+        if (contactDtos == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+    }
 }

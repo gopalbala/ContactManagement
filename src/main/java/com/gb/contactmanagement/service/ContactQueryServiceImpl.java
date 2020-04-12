@@ -40,4 +40,12 @@ public class ContactQueryServiceImpl implements ContactQueryService {
             return null;
         return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ContactDto> findByFirstNameAndCity(String name, String state) {
+        List<Contact> contacts = contactQueryRepository.findByFirstNameAndCity(name, state);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
 }

@@ -9,4 +9,6 @@ public interface ContactQueryService {
     List<ContactDto> findByMobile(String mobile);
 
     List<ContactDto> findByState(String state);
+
+    List<ContactDto> findByFirstNameAndCity(String name, String state);
 }

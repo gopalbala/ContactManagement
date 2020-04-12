@@ -15,4 +15,7 @@ public interface ContactQueryRepository extends MongoRepository<Contact, String>
 
     @Query(value = "{'address.state': {$eq: ?0}}", sort = "{firstName: 1}")
     List<Contact> findByState(String state);
+
+    @Query(value = "{$and:[{'firstName':{$regex:'^?0'}},{'address.city':{$regex: '^?1'}}]}")
+    List<Contact> findByFirstNameAndCity(String name, String city);
 }
