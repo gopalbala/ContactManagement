@@ -44,7 +44,12 @@ public class ContactController {
 
     @RequestMapping(value = "/contacts/name/{name}", method = RequestMethod.GET, produces = {"application/JSON"})
     public ResponseEntity<?> getByName(@PathVariable String name) {
-        List<ContactDto> contactDtos = contactService.findByFirstName(name);
+//        List<ContactDto> contactDtos = contactService.findByFirstName(name);
+//        if (contactDtos == null)
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+
+        List<ContactDto> contactDtos = contactService.findByFirstNameLikeOrLastNameLike(name);
         if (contactDtos == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);

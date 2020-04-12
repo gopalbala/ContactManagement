@@ -63,6 +63,14 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    public List<ContactDto> findByFirstNameLikeOrLastNameLike(String name) {
+        List<Contact> contacts = contactRepository.findByFirstNameLikeOrLastNameLike(name, name);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
     public List<ContactDto> findByGender(String gender) {
         return null;
     }

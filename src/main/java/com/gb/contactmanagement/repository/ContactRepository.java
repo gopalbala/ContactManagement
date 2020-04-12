@@ -11,13 +11,17 @@ public interface ContactRepository extends MongoRepository<Contact, String> {
     List<Contact> findByFullNameLike(String name);
     List<Contact> findByFullNameStartingWith(String name);
     List<Contact> findByFullNameEndingWith(String name);
+    List<Contact> findByFullNameContaining(String name);
+    List<Contact> findByFirstNameLikeOrLastNameLike(String firstName, String lastName);
+
     List<Contact> findByAgeGreaterThan(int age);
     List<Contact> findByAgeLessThan(int age);
     List<Contact> findByAgeBetween(int from,int to);
+
     List<Contact> findByVerifiedIsTrue();
     List<Contact> findByVerifiedIsFalse();
+
     List<Contact> findByDateOfBirthAfter(Instant dateTime);
     List<Contact> findByDateOfBirthBefore(Instant dateTime);
-    List<Contact> findByFullNameContaining(String name);
     List<Contact> findByDateOfBirthBeforeOrderByDateOfBirth(Instant dateTime);
 }

@@ -18,6 +18,7 @@ public interface ContactService {
     List<ContactDto> findByName(String name);
     List<ContactDto> findByNameStartingWith(String name);
     List<ContactDto> findByNameEndingWith(String name);
+    List<ContactDto> findByFirstNameLikeOrLastNameLike(String name);
 
     /*
         Filter by Gender - Enum based (Internally String)
