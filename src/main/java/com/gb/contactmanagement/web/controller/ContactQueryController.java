@@ -22,9 +22,18 @@ public class ContactQueryController {
     }
 
     @RequestMapping(value = "/contacts/city/{city}", method = RequestMethod.GET, produces = {"application/JSON"})
-    public ResponseEntity<?> getByFirstName(@PathVariable String city) {
+    public ResponseEntity<?> getByCity(@PathVariable String city) {
         List<ContactDto> contactDtos = null;
         contactDtos = contactQueryService.findByCity(city);
+        if (contactDtos == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/contacts/mobile/{mobile}", method = RequestMethod.GET, produces = {"application/JSON"})
+    public ResponseEntity<?> getByMobile(@PathVariable String mobile) {
+        List<ContactDto> contactDtos = null;
+        contactDtos = contactQueryService.findByMobile(mobile);
         if (contactDtos == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);

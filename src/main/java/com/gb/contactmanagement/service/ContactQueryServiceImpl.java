@@ -24,4 +24,12 @@ public class ContactQueryServiceImpl implements ContactQueryService {
             return null;
         return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ContactDto> findByMobile(String mobile) {
+        List<Contact> contacts = contactQueryRepository.findByMobile(mobile);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
 }
