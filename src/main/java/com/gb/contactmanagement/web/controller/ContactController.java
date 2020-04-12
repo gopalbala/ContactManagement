@@ -87,4 +87,9 @@ public class ContactController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/contacts/dob/{dob}", method = RequestMethod.GET, produces = {"application/JSON"})
+    public ResponseEntity<?> getbyAge(@PathVariable int age) {
+        return null;
+    }
 }
