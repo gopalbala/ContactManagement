@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface ContactRepository extends MongoRepository<Contact, String> {
     List<Contact> findByFirstNameLike(String firstName);
+    List<Contact> findByLastNameLike(String lastName);
+
     List<Contact> findByFullNameLike(String name);
     List<Contact> findByFullNameStartingWith(String name);
     List<Contact> findByFullNameEndingWith(String name);

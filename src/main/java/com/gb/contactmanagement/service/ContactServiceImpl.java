@@ -39,6 +39,14 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    public List<ContactDto> findByLastName(String lastName) {
+        List<Contact> contacts = contactRepository.findByLastNameLike(lastName);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
     public List<ContactDto> findByName(String name) {
         List<Contact> contacts = contactRepository.findByFullNameLike(name);
         if (null == contacts || contacts.size() == 0)

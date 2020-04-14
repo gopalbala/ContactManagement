@@ -13,7 +13,7 @@ public interface ContactQueryRepository extends MongoRepository<Contact, String>
     @Query(value = "{'phone.mobile':{$regex: '^?0'}}", sort = "{ age: -1 }")
     List<Contact> findByMobile(String mobile);
 
-    @Query(value = "{'address.state': {$eq: ?0}}", sort = "{firstName: 1}")
+    @Query(value = "{'address.state': {$regex: '^?0'}}", sort = "{firstName: 1}")
     List<Contact> findByState(String state);
 
     @Query(value = "{$and:[{'firstName':{$regex:'^?0'}},{'address.city':{$regex: '^?1'}}]}")

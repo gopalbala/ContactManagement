@@ -21,6 +21,14 @@ public class ContactController {
         return new ResponseEntity(contactService.save(contactDto), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/contacts/name/lastName/{lastName}", method = RequestMethod.GET, produces = {"application/JSON"})
+    public ResponseEntity<?> getByLastName(@PathVariable String lastName) {
+        List<ContactDto> contactDtos = null;
+        contactDtos = contactService.findByLastName(lastName);
+        if (contactDtos == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/contacts/name/firstName/{firstName}", method = RequestMethod.GET, produces = {"application/JSON"})
     public ResponseEntity<?> getByFirstName(@PathVariable String firstName) {
@@ -30,15 +38,21 @@ public class ContactController {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
 
-        contactDtos = contactService.findByNameStartingWith(firstName);
+//        contactDtos = contactService.findByNameStartingWith(firstName);
 //        if (contactDtos == null)
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
 
-        contactDtos = contactService.findByNameEndingWith(firstName);
+//        contactDtos = contactService.findByNameEndingWith(firstName);
+//        if (contactDtos == null)
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+
+        contactDtos = contactService.findByFullNameContaining(firstName);
         if (contactDtos == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+
     }
 
     @RequestMapping(value = "/contacts/name/{name}", method = RequestMethod.GET, produces = {"application/JSON"})
@@ -68,6 +82,7 @@ public class ContactController {
 //        if (contactDtos == null)
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+
         List<ContactDto> contactDtos = contactService.findByAgeLessThan(age);
         if (contactDtos == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

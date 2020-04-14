@@ -14,6 +14,7 @@ public interface ContactService {
      */
     List<ContactDto> findByFullNameContaining(String name);
     List<ContactDto> findByFirstName(String firstName);
+    List<ContactDto> findByLastName(String lastName);
     List<ContactDto> findByName(String name);
     List<ContactDto> findByNameStartingWith(String name);
     List<ContactDto> findByNameEndingWith(String name);
