@@ -37,4 +37,14 @@ public class ContactDslController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/contact/age/{age}/state/{state}",
+            method = RequestMethod.GET, produces = {"application/JSON"})
+    public ResponseEntity<?> findByAgeAndState(@PathVariable int age, @PathVariable String state) {
+        List<ContactDto> contactDtos = null;
+        contactDtos = contactQueryDSLService.findByAgeAndState(age, state);
+        if (contactDtos == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+    }
 }
