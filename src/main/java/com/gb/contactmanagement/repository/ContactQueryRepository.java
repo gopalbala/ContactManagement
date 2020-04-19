@@ -23,7 +23,6 @@ public interface ContactQueryRepository
     @Query(value = "{$and:[{'firstName':{$regex:'^?0'}},{'address.city':{$regex: '^?1'}}]}")
     List<Contact> findByFirstNameAndCity(String name, String city);
 
-
     @Query(value = "{'knownLanguages':'?0'}")
     List<Contact> findByKnownLanguage(String knownLanguage);
 

@@ -72,10 +72,18 @@ public class ContactQueryController {
     @RequestMapping(value = "/contacts/knownLanguages",
             method = RequestMethod.GET, produces = {"application/JSON"})
     public ResponseEntity<?> getbyKnownLanguages(@RequestParam(name = "knownLanguages")
-                                                             List<String> knownLanguages) {
+                                                         List<String> knownLanguages) {
         List<ContactDto> contactDtos = null;
+
+        if (knownLanguages == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (knownLanguages.size() < 2)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (knownLanguages.size() > 2)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         contactDtos = contactQueryService.findByKnownLanguages(knownLanguages.get(0),
                 knownLanguages.get(1));
+
         if (contactDtos == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
