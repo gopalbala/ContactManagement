@@ -28,4 +28,13 @@ public class ContactDslController {
         return new ResponseEntity<>(contactDtos, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/contact/state/{state}",
+            method = RequestMethod.GET, produces = {"application/JSON"})
+    public ResponseEntity<?> findByState(@PathVariable String state) {
+        List<ContactDto> contactDtos = null;
+        contactDtos = contactQueryDSLService.findByState(state);
+        if (contactDtos == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+    }
 }
