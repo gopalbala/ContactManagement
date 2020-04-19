@@ -5,6 +5,7 @@ import com.gb.contactmanagement.model.QContact;
 import com.gb.contactmanagement.repository.ContactQueryRepository;
 import com.gb.contactmanagement.web.dto.ContactDto;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,22 @@ public class ContactQueryDSLServiceImpl implements ContactQueryDSLService {
             return null;
         return StreamSupport.stream(contacts.spliterator(), true)
                 .map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByAgeAndState(int age, String state) {
+        QContact qContact = new QContact("queryByAgeState");
+        Predicate findAgePredicate = qContact.age.goe(age);
+        Predicate findStatePredicate = qContact.addressList.any().state.startsWith(state);
+
+        Predicate predicate = ((BooleanExpression) findAgePredicate).and(
+                findStatePredicate);
+
+        Iterable<Contact> contacts = contactQueryRepository.findAll(predicate);
+        if (contacts == null)
+            return null;
+        return StreamSupport.stream(contacts.spliterator(), true)
+                .map(ContactDto::new).collect(Collectors.toList());
+
     }
 }

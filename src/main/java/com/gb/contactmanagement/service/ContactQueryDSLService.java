@@ -8,4 +8,6 @@ public interface ContactQueryDSLService {
     List<ContactDto> findByFirstName(String name);
 
     List<ContactDto> findByState(String state);
+
+    List<ContactDto> findByAgeAndState(int age, String state);
 }
