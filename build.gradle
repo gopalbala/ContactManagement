@@ -78,7 +78,7 @@ compileJava {
         // Directory should exists before compilation started.
         generatedSourcesDir.mkdirs()
     }
-
+    // specify place to keep source files
     options.compilerArgs += ['-s', generatedSourcesDir]
 }
 test {
