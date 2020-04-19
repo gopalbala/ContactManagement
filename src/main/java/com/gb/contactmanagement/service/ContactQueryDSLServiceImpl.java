@@ -6,7 +6,6 @@ import com.gb.contactmanagement.repository.ContactQueryRepository;
 import com.gb.contactmanagement.web.dto.ContactDto;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.querydsl.QSort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,9 +22,19 @@ public class ContactQueryDSLServiceImpl implements ContactQueryDSLService {
         QContact qContact = new QContact("queryByName");
         Predicate firstNamePredicate =
                 qContact.firstName.startsWith(firstName);
-        QSort sort = QSort.by(QContact.contact.firstName.desc());
 
-        Iterable<Contact> contacts = contactQueryRepository.findAll(firstNamePredicate, sort);
+        Iterable<Contact> contacts = contactQueryRepository.findAll(firstNamePredicate);
+        if (contacts == null)
+            return null;
+        return StreamSupport.stream(contacts.spliterator(), true)
+                .map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByState(String state) {
+        QContact qContact = new QContact("queryBystate");
+        Predicate findStatePredicate = qContact.addressList.any().state.startsWith(state);
+        Iterable<Contact> contacts = contactQueryRepository.findAll(findStatePredicate);
         if (contacts == null)
             return null;
         return StreamSupport.stream(contacts.spliterator(), true)
