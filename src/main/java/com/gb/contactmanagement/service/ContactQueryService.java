@@ -11,4 +11,8 @@ public interface ContactQueryService {
     List<ContactDto> findByState(String state);
     List<ContactDto> findByFirstNameAndCity(String name, String state);
 
+    List<ContactDto> findByKnownLanguage(String knownLanguage);
+    List<ContactDto> findByKnownLanguages(String lang1, String lang2);
+    List<ContactDto> findByHeight(int weight);
+    List<ContactDto> findBySeconaryMobile(String seondaryMobile);
 }

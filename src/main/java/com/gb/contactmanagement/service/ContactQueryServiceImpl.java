@@ -48,4 +48,36 @@ public class ContactQueryServiceImpl implements ContactQueryService {
             return null;
         return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ContactDto> findByKnownLanguage(String knownLanguage) {
+        List<Contact> contacts = contactQueryRepository.findByKnownLanguage(knownLanguage);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByKnownLanguages(String lang1, String lang2) {
+        List<Contact> contacts = contactQueryRepository.findByKnownLanguages(lang1, lang2);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findByHeight(int weight) {
+        List<Contact> contacts = contactQueryRepository.findByHeight(weight);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ContactDto> findBySeconaryMobile(String seondaryMobile) {
+        List<Contact> contacts = contactQueryRepository.findBySeconaryMobile(seondaryMobile);
+        if (null == contacts || contacts.size() == 0)
+            return null;
+        return contacts.stream().map(ContactDto::new).collect(Collectors.toList());
+    }
 }

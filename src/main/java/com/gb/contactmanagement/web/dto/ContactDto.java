@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -36,6 +37,8 @@ public class ContactDto {
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime dateOfBirth;
     private List<String> friends;
+    private List<String> knownLanguages;
+    private List<Integer> bodyAttrs;
 
     public ContactDto(Contact contact) {
         this.emailId = contact.getEmailId();
@@ -49,5 +52,7 @@ public class ContactDto {
         this.phone = contact.getPhone();
         this.friends = contact.getFriends();
         this.dateOfBirth = ZonedDateTime.ofInstant(contact.getDateOfBirth(), ZoneOffset.UTC);
+        this.knownLanguages = contact.getKnownLanguages();
+        this.bodyAttrs = contact.getBodyAttrs();
     }
 }

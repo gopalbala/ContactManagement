@@ -45,6 +45,10 @@ public class Contact {
     private List<String> friends;
     @Field("verified")
     private boolean verified;
+    @Field("knownLanguages")
+    private List<String> knownLanguages;
+    @Field("bodyAttrs")
+    private List<Integer> bodyAttrs;
 
 
     public Contact(ContactDto contactDto) {
@@ -60,7 +64,8 @@ public class Contact {
         this.phone = contactDto.getPhone();
         this.dateOfBirth = contactDto.getDateOfBirth().toInstant();
         this.verified = false;
-
+        this.knownLanguages = contactDto.getKnownLanguages();
+        this.bodyAttrs = contactDto.getBodyAttrs();
     }
 
     private String getFullName(String firstName, String middleName, String lastName) {

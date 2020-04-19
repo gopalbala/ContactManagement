@@ -18,4 +18,17 @@ public interface ContactQueryRepository extends MongoRepository<Contact, String>
 
     @Query(value = "{$and:[{'firstName':{$regex:'^?0'}},{'address.city':{$regex: '^?1'}}]}")
     List<Contact> findByFirstNameAndCity(String name, String city);
+
+
+    @Query(value = "{'knownLanguages':'?0'}")
+    List<Contact> findByKnownLanguage(String knownLanguage);
+
+    @Query(value = "{'knownLanguages':{ $all:['?0','?1']}}")
+    List<Contact> findByKnownLanguages(String lang1, String lang2);
+
+    @Query(value = "{bodyAttrs: {$gt: ?0}}")
+    List<Contact> findByHeight(int height);
+
+    @Query(value = "{'phone.secondaryMobile': null}")
+    List<Contact> findBySeconaryMobile(String seondaryMobile);
 }
