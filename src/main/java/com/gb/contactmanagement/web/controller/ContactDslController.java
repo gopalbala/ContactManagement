@@ -50,7 +50,7 @@ public class ContactDslController {
 
     @RequestMapping(value = "/contact/age/{start}/age/{end}",
             method = RequestMethod.GET, produces = {"application/JSON"})
-    public ResponseEntity<?> findByAgeAndState(@PathVariable int start, @PathVariable int end) {
+    public ResponseEntity<?> findByAgeBetween(@PathVariable int start, @PathVariable int end) {
         List<ContactDto> contactDtos = null;
         contactDtos = contactQueryDSLService.findByAgeBetween(start, end);
         if (contactDtos == null)
