@@ -7,6 +7,7 @@ import com.gb.contactmanagement.web.dto.ContactDto;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.querydsl.QSort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,11 +21,12 @@ public class ContactQueryDSLServiceImpl implements ContactQueryDSLService {
 
     @Override
     public List<ContactDto> findByFirstName(String firstName) {
-        QContact qContact = new QContact("queryByName");
+        QContact qContact = new QContact("queryByFirstName");
         Predicate firstNamePredicate =
                 qContact.firstName.startsWith(firstName);
 
-        Iterable<Contact> contacts = contactQueryRepository.findAll(firstNamePredicate);
+        QSort sort = QSort.by(QContact.contact.firstName.asc());
+        Iterable<Contact> contacts = contactQueryRepository.findAll(firstNamePredicate, sort);
         if (contacts == null)
             return null;
         return StreamSupport.stream(contacts.spliterator(), true)
@@ -35,7 +37,8 @@ public class ContactQueryDSLServiceImpl implements ContactQueryDSLService {
     public List<ContactDto> findByState(String state) {
         QContact qContact = new QContact("queryBystate");
         Predicate findStatePredicate = qContact.addressList.any().state.startsWith(state);
-        Iterable<Contact> contacts = contactQueryRepository.findAll(findStatePredicate);
+        QSort sort = QSort.by(QContact.contact.age.asc());
+        Iterable<Contact> contacts = contactQueryRepository.findAll(findStatePredicate, sort);
         if (contacts == null)
             return null;
         return StreamSupport.stream(contacts.spliterator(), true)
@@ -50,8 +53,8 @@ public class ContactQueryDSLServiceImpl implements ContactQueryDSLService {
 
         Predicate predicate = ((BooleanExpression) findAgePredicate).and(
                 findStatePredicate);
-
-        Iterable<Contact> contacts = contactQueryRepository.findAll(predicate);
+        QSort sort = QSort.by(QContact.contact.fullName.asc());
+        Iterable<Contact> contacts = contactQueryRepository.findAll(predicate, sort);
         if (contacts == null)
             return null;
         return StreamSupport.stream(contacts.spliterator(), true)
@@ -68,7 +71,9 @@ public class ContactQueryDSLServiceImpl implements ContactQueryDSLService {
                 ((BooleanExpression) findAgeGreaterThan)
                         .and(findAgeLessThan);
 
-        Iterable<Contact> contacts = contactQueryRepository.findAll(predicate);
+        QSort sort = QSort.by(QContact.contact.age.desc());
+
+        Iterable<Contact> contacts = contactQueryRepository.findAll(predicate, sort);
         if (contacts == null)
             return null;
         return StreamSupport.stream(contacts.spliterator(), true)
