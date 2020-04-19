@@ -58,4 +58,20 @@ public class ContactQueryDSLServiceImpl implements ContactQueryDSLService {
                 .map(ContactDto::new).collect(Collectors.toList());
 
     }
+
+    @Override
+    public List<ContactDto> findByAgeBetween(int start, int end) {
+        QContact qContact = new QContact("queryByAgeBetween");
+        Predicate findAgeGreaterThan = qContact.age.goe(start);
+        Predicate findAgeLessThan = qContact.age.loe(end);
+        Predicate predicate =
+                ((BooleanExpression) findAgeGreaterThan)
+                        .and(findAgeLessThan);
+
+        Iterable<Contact> contacts = contactQueryRepository.findAll(predicate);
+        if (contacts == null)
+            return null;
+        return StreamSupport.stream(contacts.spliterator(), true)
+                .map(ContactDto::new).collect(Collectors.toList());
+    }
 }
