@@ -1,5 +1,7 @@
 package com.gb.contactmanagement.service;
 
+import java.util.List;
+
 public interface ContactUpdateService {
     long updateFirstName(String email, String firstName);
 
@@ -10,4 +12,6 @@ public interface ContactUpdateService {
     long updatePhone(String email, String phone);
 
     long updateLanguage(String email, String language);
+
+    long updateLanguages(String email, List<String> languages);
 }

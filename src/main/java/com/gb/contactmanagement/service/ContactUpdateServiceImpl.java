@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -87,6 +88,16 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
         Query query = new Query(where("_id").is(email));
         Update contactToUpdate = new Update();
         contactToUpdate.push("knownLanguages", language);
+        UpdateResult updateResult =
+                mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
+        return updateResult.getModifiedCount();
+    }
+
+    @Override
+    public long updateLanguages(String email, List<String> languages) {
+        Query query = new Query(where("_id").is(email));
+        Update contactToUpdate = new Update();
+        contactToUpdate.pullAll("knownLanguages", languages.toArray());
         UpdateResult updateResult =
                 mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
         return updateResult.getModifiedCount();
