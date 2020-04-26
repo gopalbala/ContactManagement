@@ -1,5 +1,7 @@
 package com.gb.contactmanagement.service;
 
+import com.gb.contactmanagement.web.dto.ContactDto;
+
 import java.util.List;
 
 public interface ContactUpdateService {
@@ -20,4 +22,6 @@ public interface ContactUpdateService {
     long updateLanguageToSet(String email, String language);
 
     long updateVerifiedFlagByState(String state, boolean verifiedFlag);
+
+    long upsert(ContactDto contactDto);
 }

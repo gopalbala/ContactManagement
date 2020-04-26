@@ -2,6 +2,7 @@ package com.gb.contactmanagement.service;
 
 import com.gb.contactmanagement.model.Contact;
 import com.gb.contactmanagement.repository.ContactRepository;
+import com.gb.contactmanagement.web.dto.ContactDto;
 import com.mongodb.client.result.UpdateResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,6 +133,16 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
         UpdateResult updateResult =
                 mongoTemplate.updateMulti(query, contactToUpdate,
                         Contact.class, "contacts");
+        return updateResult.getModifiedCount();
+    }
+
+    @Override
+    public long upsert(ContactDto contactDto) {
+        Contact contact = new Contact(contactDto);
+        Query query = new Query(where("_id").is(contact.getEmailId()));
+        Update contactToUpdate = new Update();
+        UpdateResult updateResult =
+                mongoTemplate.upsert(query, contactToUpdate, Contact.class);
         return updateResult.getModifiedCount();
     }
 }

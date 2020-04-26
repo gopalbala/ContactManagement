@@ -1,6 +1,7 @@
 package com.gb.contactmanagement.web.controller;
 
 import com.gb.contactmanagement.service.ContactUpdateService;
+import com.gb.contactmanagement.web.dto.ContactDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -100,5 +101,10 @@ public class ContactUpdateController {
         if (updatedCount == -1)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(updatedCount);
+    }
+
+    @RequestMapping(value = "/contacts/update", method = RequestMethod.POST, produces = {"application/JSON"}, consumes = {"application/JSON"})
+    public ResponseEntity<?> addContact(@RequestBody ContactDto contactDto) {
+        return ResponseEntity.ok(contactUpdateService.upsert(contactDto));
     }
 }
