@@ -8,4 +8,6 @@ public interface ContactUpdateService {
     long updateVerifiedFlag(String email, boolean verifiedFlag);
 
     long updatePhone(String email, String phone);
+
+    long updateLanguage(String email, String language);
 }
