@@ -68,4 +68,15 @@ public class ContactUpdateController {
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(updatedCount);
     }
+
+    @RequestMapping(value = "/contacts/{email}/languages",
+            method = RequestMethod.PUT, produces = {"application/JSON"})
+    public ResponseEntity<?> updateAge(@PathVariable String email,
+                                       @PathVariable int age) {
+
+        long updatedCount = contactUpdateService.updateAge(email, age);
+        if (updatedCount == -1)
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(updatedCount);
+    }
 }
