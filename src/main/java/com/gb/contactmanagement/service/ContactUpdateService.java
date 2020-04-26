@@ -19,5 +19,5 @@ public interface ContactUpdateService {
 
     long updateLanguageToSet(String email, String language);
 
-    long updateAll(String state, boolean verifiedFlag);
+    long updateVerifiedFlagByState(String state, boolean verifiedFlag);
 }

@@ -125,7 +125,7 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
     }
 
     @Override
-    public long updateAll(String state, boolean verifiedFlag) {
+    public long updateVerifiedFlagByState(String state, boolean verifiedFlag) {
         Query query = new Query(where("state").alike(Example.of(state)));
         Update contactToUpdate = new Update();
         contactToUpdate.set("verified", verifiedFlag);
