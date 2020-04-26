@@ -5,7 +5,6 @@ import com.gb.contactmanagement.repository.ContactRepository;
 import com.mongodb.client.result.UpdateResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -126,11 +125,13 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
 
     @Override
     public long updateVerifiedFlagByState(String state, boolean verifiedFlag) {
-        Query query = new Query(where("state").alike(Example.of(state)));
+        Query query = new Query(where("address.state")
+                .is(state));
         Update contactToUpdate = new Update();
         contactToUpdate.set("verified", verifiedFlag);
         UpdateResult updateResult =
-                mongoTemplate.updateMulti(query, contactToUpdate, Contact.class);
+                mongoTemplate.updateMulti(query, contactToUpdate,
+                        Contact.class, "contacts");
         return updateResult.getModifiedCount();
     }
 }
