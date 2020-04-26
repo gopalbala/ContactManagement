@@ -102,4 +102,14 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
                 mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
         return updateResult.getModifiedCount();
     }
+
+    @Override
+    public long updateAge(String email, int age) {
+        Query query = new Query(where("_id").is(email));
+        Update contactToUpdate = new Update();
+        contactToUpdate.inc("age", age);
+        UpdateResult updateResult =
+                mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
+        return updateResult.getModifiedCount();
+    }
 }
