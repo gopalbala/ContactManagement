@@ -90,4 +90,15 @@ public class ContactUpdateController {
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(updatedCount);
     }
+
+    @RequestMapping(value = "/contacts/state/{state}/verified/{verified}",
+            method = RequestMethod.PUT, produces = {"application/JSON"})
+    public ResponseEntity<?> updateState(@PathVariable String state,
+                                         @PathVariable boolean verified) {
+
+        long updatedCount = contactUpdateService.updateVerifiedFlagByState(state, verified);
+        if (updatedCount == -1)
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(updatedCount);
+    }
 }
