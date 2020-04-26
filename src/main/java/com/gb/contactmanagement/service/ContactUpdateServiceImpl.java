@@ -62,7 +62,7 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
     }
 
     @Override
-    public long updateVerfiedFlag(String email, boolean verifiedFlag) {
+    public long updateVerifiedFlag(String email, boolean verifiedFlag) {
         Query query = new Query(where("_id").is(email));
         Update contactToUpdate = Update.update("verified", verifiedFlag);
         UpdateResult updateResult = mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);

@@ -25,4 +25,15 @@ public class ContactUpdateController {
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(updatedCount);
     }
+
+    @RequestMapping(value = "/contacts/{email}/verified/{verifiedFlag}",
+            method = RequestMethod.PUT, produces = {"application/JSON"})
+    public ResponseEntity<?> updateFistName(@PathVariable String email,
+                                            @PathVariable boolean verifiedFlag) {
+
+        long updatedCount = contactUpdateService.updateVerifiedFlag(email, verifiedFlag);
+        if (updatedCount == -1)
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(updatedCount);
+    }
 }

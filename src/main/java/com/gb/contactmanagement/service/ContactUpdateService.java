@@ -5,5 +5,5 @@ public interface ContactUpdateService {
 
     long updateFirstNameMongoTemplate(String email, String firstName);
 
-    long updateVerfiedFlag(String email, boolean verifiedFlag);
+    long updateVerifiedFlag(String email, boolean verifiedFlag);
 }
