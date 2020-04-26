@@ -40,7 +40,10 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
         contactToUpdate.setFullName(fullName);
 
         Contact result = contactRepository.save(contactToUpdate);
-        return 1;
+        if (result != null)
+            return 1;
+        else
+            return -1;
     }
 
     @Override
@@ -98,6 +101,7 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
     public long updateLanguages(String email, List<String> languages) {
         Query query = new Query(where("_id").is(email));
         Update contactToUpdate = new Update();
+        contactToUpdate.currentDate("updatedDate");
         contactToUpdate.push("knownLanguages").each(languages.toArray());
         UpdateResult updateResult =
                 mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
@@ -108,6 +112,7 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
     public long updateAge(String email, int age) {
         Query query = new Query(where("_id").is(email));
         Update contactToUpdate = new Update();
+        contactToUpdate.currentDate("updatedDate");
         contactToUpdate.inc("age", age);
         UpdateResult updateResult =
                 mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
@@ -118,7 +123,8 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
     public long updateLanguageToSet(String email, String language) {
         Query query = new Query(where("_id").is(email));
         Update contactToUpdate = new Update();
-        contactToUpdate.addToSet("language", language);
+        contactToUpdate.currentDate("updatedDate");
+        contactToUpdate.addToSet("knownLanguages", language);
         UpdateResult updateResult =
                 mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
         return updateResult.getModifiedCount();
@@ -129,6 +135,7 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
         Query query = new Query(where("address.state")
                 .is(state));
         Update contactToUpdate = new Update();
+        contactToUpdate.currentDate("updatedDate");
         contactToUpdate.set("verified", verifiedFlag);
         UpdateResult updateResult =
                 mongoTemplate.updateMulti(query, contactToUpdate,
@@ -141,6 +148,10 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
         Contact contact = new Contact(contactDto);
         Query query = new Query(where("_id").is(contact.getEmailId()));
         Update contactToUpdate = new Update();
+        contactToUpdate.set("address", contact.getAddressList());
+        contactToUpdate.set("phone", contact.getPhone());
+        contactToUpdate.set("knownLanguages", contact.getKnownLanguages());
+        contactToUpdate.currentDate("updatedDate");
         UpdateResult updateResult =
                 mongoTemplate.upsert(query, contactToUpdate, Contact.class);
         return updateResult.getModifiedCount();

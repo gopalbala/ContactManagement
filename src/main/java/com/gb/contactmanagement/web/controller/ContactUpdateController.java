@@ -20,7 +20,7 @@ public class ContactUpdateController {
     public ResponseEntity<?> updateFirstName(@PathVariable String email,
                                              @PathVariable String firstName) {
 
-        long updatedCount = contactUpdateService.updateFirstNameMongoTemplate(email, firstName);
+        long updatedCount = contactUpdateService.updateLanguageToSet(email, firstName);
         if (updatedCount == -1)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(updatedCount);
