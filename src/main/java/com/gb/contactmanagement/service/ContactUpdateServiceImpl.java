@@ -53,12 +53,19 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
         contact.setFullName(fullName);
 
         Query query = new Query(where("_id").is(email));
-        Update conToUpdate = new Update();
-        conToUpdate.set("firstName", firstName);
-        conToUpdate.set("fullName", fullName);
-
+        Update contactToUpdate = new Update();
+        contactToUpdate.set("firstName", firstName);
+        contactToUpdate.set("fullName", fullName);
         UpdateResult updateResult =
-                mongoTemplate.updateFirst(query, conToUpdate, Contact.class);
+                mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
+        return updateResult.getModifiedCount();
+    }
+
+    @Override
+    public long updateVerfiedFlag(String email, boolean verifiedFlag) {
+        Query query = new Query(where("_id").is(email));
+        Update contactToUpdate = Update.update("verified", verifiedFlag);
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
         return updateResult.getModifiedCount();
     }
 }
