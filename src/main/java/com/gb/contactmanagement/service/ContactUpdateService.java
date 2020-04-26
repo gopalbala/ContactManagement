@@ -18,4 +18,6 @@ public interface ContactUpdateService {
     long updateAge(String email, int age);
 
     long updateLanguageToSet(String email, String language);
+
+    long updateAll(String state, boolean verifiedFlag);
 }
