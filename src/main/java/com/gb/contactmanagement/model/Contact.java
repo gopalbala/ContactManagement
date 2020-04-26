@@ -49,7 +49,10 @@ public class Contact {
     private List<String> knownLanguages;
     @Field("bodyAttrs")
     private List<Integer> bodyAttrs;
-
+    @Field("createdDate")
+    private Instant createdDate;
+    @Field("updatedDate")
+    private Instant updatedDate;
 
     public Contact(ContactDto contactDto) {
         this.emailId = contactDto.getEmailId();
@@ -66,6 +69,8 @@ public class Contact {
         this.verified = false;
         this.knownLanguages = contactDto.getKnownLanguages();
         this.bodyAttrs = contactDto.getBodyAttrs();
+        this.createdDate = Instant.now();
+        this.updatedDate = Instant.now();
     }
 
     private String getFullName(String firstName, String middleName, String lastName) {

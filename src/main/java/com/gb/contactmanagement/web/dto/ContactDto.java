@@ -2,18 +2,15 @@ package com.gb.contactmanagement.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.key.ZonedDateTimeKeyDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.key.ZonedDateTimeKeySerializer;
 import com.gb.contactmanagement.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -39,6 +36,8 @@ public class ContactDto {
     private List<String> friends;
     private List<String> knownLanguages;
     private List<Integer> bodyAttrs;
+    private Instant createdDate;
+    private Instant updatedDate;
 
     public ContactDto(Contact contact) {
         this.emailId = contact.getEmailId();
@@ -54,5 +53,7 @@ public class ContactDto {
         this.dateOfBirth = ZonedDateTime.ofInstant(contact.getDateOfBirth(), ZoneOffset.UTC);
         this.knownLanguages = contact.getKnownLanguages();
         this.bodyAttrs = contact.getBodyAttrs();
+        this.createdDate = contact.getCreatedDate();
+        this.updatedDate = contact.getUpdatedDate();
     }
 }
