@@ -97,7 +97,7 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
     public long updateLanguages(String email, List<String> languages) {
         Query query = new Query(where("_id").is(email));
         Update contactToUpdate = new Update();
-        contactToUpdate.pullAll("knownLanguages", languages.toArray());
+        contactToUpdate.push("knownLanguages").each(languages.toArray());
         UpdateResult updateResult =
                 mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
         return updateResult.getModifiedCount();

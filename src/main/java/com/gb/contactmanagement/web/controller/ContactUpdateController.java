@@ -61,7 +61,7 @@ public class ContactUpdateController {
     @RequestMapping(value = "/contacts/{email}/languages",
             method = RequestMethod.PUT, produces = {"application/JSON"})
     public ResponseEntity<?> updateLanguages(@PathVariable String email,
-                                             @RequestParam("languages") List<String> languages) {
+                                             @RequestParam("language") List<String> languages) {
 
         long updatedCount = contactUpdateService.updateLanguages(email, languages);
         if (updatedCount == -1)
@@ -69,7 +69,7 @@ public class ContactUpdateController {
         return ResponseEntity.ok(updatedCount);
     }
 
-    @RequestMapping(value = "/contacts/{email}/languages",
+    @RequestMapping(value = "/contacts/{email}/age/{age}",
             method = RequestMethod.PUT, produces = {"application/JSON"})
     public ResponseEntity<?> updateAge(@PathVariable String email,
                                        @PathVariable int age) {
