@@ -56,6 +56,7 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
         Update contactToUpdate = new Update();
         contactToUpdate.set("firstName", firstName);
         contactToUpdate.set("fullName", fullName);
+        contactToUpdate.currentTimestamp("updatedDate");
         UpdateResult updateResult =
                 mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
         return updateResult.getModifiedCount();
@@ -65,7 +66,9 @@ public class ContactUpdateServiceImpl implements ContactUpdateService {
     public long updateVerifiedFlag(String email, boolean verifiedFlag) {
         Query query = new Query(where("_id").is(email));
         Update contactToUpdate = Update.update("verified", verifiedFlag);
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
+        contactToUpdate.currentDate("updatedDate");
+        UpdateResult updateResult =
+                mongoTemplate.updateFirst(query, contactToUpdate, Contact.class);
         return updateResult.getModifiedCount();
     }
 }
