@@ -16,4 +16,6 @@ public interface ContactUpdateService {
     long updateLanguages(String email, List<String> languages);
 
     long updateAge(String email, int age);
+
+    long updateLanguageToSet(String email, String language);
 }
