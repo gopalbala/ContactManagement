@@ -1,7 +1,6 @@
 package com.gb.contactmanagement.web.controller;
 
 import com.gb.contactmanagement.service.ContactUpdateService;
-import com.gb.contactmanagement.web.dto.ContactDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +16,13 @@ public class ContactUpdateController {
     ContactUpdateService contactUpdateService;
 
     @RequestMapping(value = "/contacts/{email}/name/firstName/{firstName}",
-            method = RequestMethod.GET, produces = {"application/JSON"})
+            method = RequestMethod.PUT, produces = {"application/JSON"})
     public ResponseEntity<?> updateFistName(@PathVariable String email,
                                             @PathVariable String firstName) {
-        ContactDto contactDto = null;
-        contactDto = contactUpdateService.updateFirstName(email, firstName);
-        if (contactDto == null)
+
+        long updatedCount = contactUpdateService.updateFirstNameMongoTemplate(email, firstName);
+        if (updatedCount == -1)
             return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(contactDto);
+        return ResponseEntity.ok(updatedCount);
     }
 }
