@@ -3,10 +3,9 @@ package com.gb.contactmanagement.web.controller;
 import com.gb.contactmanagement.service.ContactUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/contactservice/v1")
@@ -54,6 +53,17 @@ public class ContactUpdateController {
                                             @PathVariable String language) {
 
         long updatedCount = contactUpdateService.updateLanguage(email, language);
+        if (updatedCount == -1)
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(updatedCount);
+    }
+
+    @RequestMapping(value = "/contacts/{email}/languages",
+            method = RequestMethod.PUT, produces = {"application/JSON"})
+    public ResponseEntity<?> updateLanguages(@PathVariable String email,
+                                             @RequestParam("languages") List<String> languages) {
+
+        long updatedCount = contactUpdateService.updateLanguages(email, languages);
         if (updatedCount == -1)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(updatedCount);
