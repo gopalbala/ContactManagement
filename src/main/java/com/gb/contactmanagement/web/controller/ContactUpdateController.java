@@ -17,8 +17,8 @@ public class ContactUpdateController {
 
     @RequestMapping(value = "/contacts/{email}/name/firstName/{firstName}",
             method = RequestMethod.PUT, produces = {"application/JSON"})
-    public ResponseEntity<?> updateFistName(@PathVariable String email,
-                                            @PathVariable String firstName) {
+    public ResponseEntity<?> updateFirstName(@PathVariable String email,
+                                             @PathVariable String firstName) {
 
         long updatedCount = contactUpdateService.updateFirstNameMongoTemplate(email, firstName);
         if (updatedCount == -1)
@@ -28,10 +28,21 @@ public class ContactUpdateController {
 
     @RequestMapping(value = "/contacts/{email}/verified/{verifiedFlag}",
             method = RequestMethod.PUT, produces = {"application/JSON"})
-    public ResponseEntity<?> updateFistName(@PathVariable String email,
-                                            @PathVariable boolean verifiedFlag) {
+    public ResponseEntity<?> updateVerifiedFlag(@PathVariable String email,
+                                                @PathVariable boolean verifiedFlag) {
 
         long updatedCount = contactUpdateService.updateVerifiedFlag(email, verifiedFlag);
+        if (updatedCount == -1)
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(updatedCount);
+    }
+
+    @RequestMapping(value = "/contacts/{email}/phone/{phone}",
+            method = RequestMethod.PUT, produces = {"application/JSON"})
+    public ResponseEntity<?> updatePhone(@PathVariable String email,
+                                         @PathVariable String phone) {
+
+        long updatedCount = contactUpdateService.updatePhone(email, phone);
         if (updatedCount == -1)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(updatedCount);
