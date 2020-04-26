@@ -26,8 +26,8 @@ public class ContactController {
         List<ContactDto> contactDtos = null;
         contactDtos = contactService.findByLastName(lastName);
         if (contactDtos == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(contactDtos);
     }
 
     @RequestMapping(value = "/contacts/name/firstName/{firstName}", method = RequestMethod.GET, produces = {"application/JSON"})
@@ -35,23 +35,23 @@ public class ContactController {
         List<ContactDto> contactDtos = null;
 //        contactDtos = contactService.findByFirstName(firstName);
 //        if (contactDtos == null)
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+//            return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(contactDtos);
 
 //        contactDtos = contactService.findByNameStartingWith(firstName);
 //        if (contactDtos == null)
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+//            return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(contactDtos);
 
 //        contactDtos = contactService.findByNameEndingWith(firstName);
 //        if (contactDtos == null)
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+//            return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(contactDtos);
 
         contactDtos = contactService.findByFullNameContaining(firstName);
         if (contactDtos == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(contactDtos);
 
     }
 
@@ -59,13 +59,13 @@ public class ContactController {
     public ResponseEntity<?> getByName(@PathVariable String name) {
 //        List<ContactDto> contactDtos = contactService.findByFirstName(name);
 //        if (contactDtos == null)
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+//            return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(contactDtos);
 
         List<ContactDto> contactDtos = contactService.findByFirstNameLikeOrLastNameLike(name);
         if (contactDtos == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(contactDtos);
     }
 
     @RequestMapping(value = "/contacts/{emailId}", method = RequestMethod.GET, produces = {"application/JSON"})
@@ -80,33 +80,33 @@ public class ContactController {
     public ResponseEntity<?> getByName(@PathVariable int age) {
 //        List<ContactDto> contactDtos = contactService.findByAgeGreaterThan(age);
 //        if (contactDtos == null)
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+//            return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(contactDtos);
 
         List<ContactDto> contactDtos = contactService.findByAgeLessThan(age);
         if (contactDtos == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(contactDtos);
     }
 
     @RequestMapping(value = "/contacts/age/{age1}/{age2}", method = RequestMethod.GET, produces = {"application/JSON"})
     public ResponseEntity<?> getByName(@PathVariable int age1, @PathVariable int age2) {
 //        List<ContactDto> contactDtos = contactService.findByAgeGreaterThan(age);
 //        if (contactDtos == null)
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+//            return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(contactDtos);
         List<ContactDto> contactDtos = contactService.findByAgeBetween(age1, age2);
         if (contactDtos == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(contactDtos);
     }
 
     @RequestMapping(value = "/contacts/verified/{isVerified}", method = RequestMethod.GET, produces = {"application/JSON"})
     public ResponseEntity<?> getVerifiedContacts(@PathVariable boolean isVerified) {
         List<ContactDto> contactDtos = contactService.findByVerified(isVerified);
         if (contactDtos == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(contactDtos);
     }
 
     /**
@@ -118,18 +118,18 @@ public class ContactController {
     public ResponseEntity<?> getbyDob(@PathVariable Instant dateTime) {
 //        List<ContactDto> contactDtos = contactService.findByDateOfBirthAfter(dateTime);
 //        if (contactDtos == null)
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+//            return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(contactDtos);
 
 //        List<ContactDto> contactDtos = contactService.findByDateOfBirthBefore(dateTime);
 //        if (contactDtos == null)
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+//            return ResponseEntity.notFound().build();
+//        return ResponseEntity.ok(contactDtos);
 
         List<ContactDto> contactDtos = contactService.findByDateOfBirthBeforeSortByDateOfBirthDesc(dateTime);
         if (contactDtos == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(contactDtos, HttpStatus.OK);
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(contactDtos);
 
     }
 }
